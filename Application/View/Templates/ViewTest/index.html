@@ -1,0 +1,53 @@
+<!--{subtemplate header}-->
+
+<p>ViewTest\index.html</p>
+<pre>
+// 条件表达式
+{if isset($a) && $a == 1}
+	{echo $a}
+{else}
+	{echo 222}
+{/if}
+
+// foreach遍历数组两种写法 & 自动is_array($data)判断
+{loop $data $key $val}
+{$val}
+{/loop}
+<hr>
+{loop $data $val}
+{$val}
+{/loop}
+
+// 支持eval表达式, 所有PHP语法
+{eval echo trim('123 ');}
+
+// 另一种加载模版方法
+{template admin/index}
+
+// 输出一个变量三种写法
+<!--{$name}-->
+
+{echo $name}
+
+{$name}
+
+// 日期输出
+<!--{date(Ymd)}-->
+
+<script src="http://www.box3.cn/bootstrap/js/jquery-1.9.1.min.js"></script>
+
+// 定向符例子
+{block title}
+test
+aaaa
+cccd
+dddd
+{/block}
+
+// 输出定向符
+{$title}
+
+<a href="http://www.cdvphp.com?id=1&user=test" target="_blank">CdvPHP.com</a>
+</pre>
+// 加载模版
+<!--{subtemplate footer}-->
