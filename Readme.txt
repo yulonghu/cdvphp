@@ -58,6 +58,7 @@ Application\Library 开发者自定义类存放目录，命名规则 "类名Libr
 
 【注】
 
-1. 在线手册(有大量的例子)：http://www.cdvphp.com/help4/
-2. 非常感谢大家对CdvPHP 4.0大力支持，及一直以来支持CdvPHP的朋友！
+1. CdvPHP的未来需要大家的扶持与迭代，我们一起来参与开发吧！感谢所有对CdvPHP关注的朋友！
+2. 在线手册(有大量的例子)：http://www.cdvphp.com/help4/
+3. QQ群：26778603
 

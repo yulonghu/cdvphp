@@ -165,6 +165,6 @@ class ClassController
 	 */
 	public function __destruct()
 	{/*{{{*/
-		echo 'exec_time: ' . Loader::getInstance('Timer')->end();
+		echo '<hr> exec_time: ' . Loader::getInstance('Timer')->end();
 	}/*}}}*/
 }
