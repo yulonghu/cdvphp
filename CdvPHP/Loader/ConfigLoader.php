@@ -1,6 +1,6 @@
 <?php
 /**
- * 配置文件读取 (global.php)
+ * 配置文件读取 (Config\Global.php)
  *
  * @link http://www.cdvphp.com
  * @author <fanjiapeng@126.com>
@@ -16,6 +16,12 @@ class ConfigLoader
 
 	/**
 	 * 从配置文件读取单个变量的值, 变量不存在返回 null
+	 *
+	 * Example #1
+	 *
+	 * <code>
+	 * print_r(ConfigLoader::getVar('system'));
+	 * </code>
 	 *
 	 * @param string $property  变量名称
 	 *
@@ -33,6 +39,12 @@ class ConfigLoader
 
 	/**
 	 * 从配置文件读取全部变量的值
+	 *
+	 * Example #1
+	 *
+	 * <code>
+	 * print_r(ConfigLoader::getVars());
+	 * </code>
 	 *
 	 * @return array  
 	 */

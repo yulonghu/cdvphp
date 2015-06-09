@@ -132,6 +132,7 @@ class Curl
      * CURL GET方法封装
      *
      * Example #1
+	 *
      * <code>
      * $curl = Loader::getIntances('Curl');
      * echo $curl->get('www.baidu.com');
@@ -151,18 +152,21 @@ class Curl
      * CURL POST方法封装
      *
      * Example #1
+	 *
      * <code>
      * $curl = Loader::getIntances('Curl');
      * echo $curl->post('www.baidu.com', array('user' => 'ceshi', 'nickname' => '哈哈'));
      * </code>
      *
      * Example #2
+	 *
      * <code>
      * $curl = Loader::getIntances('Curl');
      * print_r($curl->post('www.baidu.com', 'user=ceshi&nickname=哈哈'));
      * </code>
      *
 	 * Example #3
+	 *
      * <code>
      * $curl = Loader::getIntances('Curl');
 	 * print_r($curl->post('http://www.baidu.com/test/checkuser', 
@@ -191,6 +195,7 @@ class Curl
      * CURL GET方法, 只获取目的URL地址Header头信息
      *
      * Example #1
+	 *
      * <code>
      * $curl = Loader::getIntances('Curl');
      * echo $curl->getHeader('www.baidu.com');
@@ -227,6 +232,7 @@ class Curl
      * 获取配置的 all options
 	 *
 	 * Example #1
+	 *
      * <code>
      * $curl = Loader::getIntances('Curl');
      * print_r($curl->getOpts());

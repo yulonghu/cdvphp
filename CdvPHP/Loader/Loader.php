@@ -34,6 +34,12 @@ class Loader
 	/**
 	 * 类的单例, 如果找不到类, 抛出异常
 	 *
+	 * Example #1
+	 *
+	 * <code>
+	 * $handle = Loader::getInstance('classname');
+	 * </code>
+	 *
 	 * @param string $class_name 类名
 	 *
 	 * @return object  
@@ -54,6 +60,12 @@ class Loader
 
 	/**
 	 * 清除已经加载的类(单个)
+	 *
+	 * Example #1
+	 *
+	 * <code>
+	 * Loader::clean('classname');
+	 * </code>
 	 *
 	 * @param string $class_name 类名
 	 *
@@ -76,6 +88,12 @@ class Loader
 	/**
 	 * 清除已经加载的类(全部)
 	 *
+	 * Example #1
+	 *
+	 * <code>
+	 * Loader::cleanAll();
+	 * </code>
+	 *
 	 * @return void
 	 */
 	public static function cleanAll()
@@ -86,11 +104,20 @@ class Loader
 
 	private static function _checkClassName($class_name)
 	{/*{{{*/
-		return (empty($class_name) || is_array($class_name));
+		if(empty($class_name) || is_array($class_name))
+		{
+			throw new RuntimeException('Loader class name error');
+		}
 	}/*}}}*/
 
 	/**
 	 * 获取用户已经实例化的所有类 (不包含框架实例化的类)
+	 *
+	 * Example #1
+	 *
+	 * <code>
+	 * print_r(Loader::getRegisteredClass());
+	 * </code>
 	 *
 	 * @return array
 	 */
@@ -102,6 +129,12 @@ class Loader
 
 	/**
 	 * 返回所有被 include、 include_once、 require 和 require_once 的文件名
+	 *
+	 * Example #1
+	 *
+	 * <code>
+	 * print_r(Loader::getIncludeFiles());
+	 * </code>
 	 *
 	 * @return array
 	 */
