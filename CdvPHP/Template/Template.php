@@ -72,7 +72,7 @@ class Template
 	}/*}}}*/
 
 	/**
-	 * 生成目录: {$path}/TemplatesCache/CdvPHP.ViewTest.index.tpl.php
+	 * 生成目录: TemplatesCache/CdvPHP.ViewTest.index.tpl.php
 	 *
 	 * @param string $file 模板文件名称
 	 * @param string $tpldir 指定模板路径, 如果有值, 不会读取配置文件path
@@ -90,13 +90,19 @@ class Template
 
 		if(!$tpldir)
 		{
-			$tpldir =  $arr_template['template']['path'];
+			$tpldir = $arr_template['template']['path'];
+		}
+
+		if(!is_dir($arr_template['template']['cache']))
+		{
+			mkdir($arr_template['template']['cache'], 0777);
 		}
 
 		$tpldir = substr($tpldir, -1) == '/' ? $tpldir : "{$tpldir}/";
-		$tplfile = "{$tpldir}Templates/{$file}.{$arr_template['template']['suffix']}";
-		
-		$cachefile = "{$tpldir}TemplatesCache/{$templateid}.%s.tpl.php";
+		$arr_template['template']['cache'] = substr($arr_template['template']['cache'], -1) == '/' ? $arr_template['template']['cache'] : "{$arr_template['template']['cache']}/";
+
+		$tplfile = "{$tpldir}{$file}.{$arr_template['template']['suffix']}";
+		$cachefile = "{$arr_template['template']['cache']}{$templateid}.%s.tpl.php";
 		$cachefile = sprintf($cachefile, str_replace('/', '.', $file));
 
 		if(!file_exists($tplfile))

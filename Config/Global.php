@@ -30,10 +30,15 @@ $system = array(
 	/** 如果没有页面展示, 只有服务端API接口, (template)模版配置可以去掉 */
 	'template' => array(
 		/**
-		 * 模版路径
+		 * 模版路径, 最后斜杠可以省略 (目录具备读写权限)
 		 * @var string path
 		 */
-		'path' => ROOT_PATH . '/Application/View/',
+		'path' => ROOT_PATH . '/Application/View/Templates/',
+		/**
+		 * 设置模版缓存目录, 最后斜杠可以省略 (目录具备读写权限, 文件夹不存在则会自动创建)
+		 * @var string cache
+		 */
+		'cache' => ROOT_PATH . '/Application/View/TemplatesCache/',
 		/**
 		 * 1 开启模版刷新, 0 关闭模版刷新
 		 * @var int refresh
@@ -43,7 +48,7 @@ $system = array(
 		 * 设置模板后缀
 		 * @var string suffix
 		 */
-		'suffix' => 'html'
+		'suffix' => 'html',
 	),
 
 	/** 设置 参数index.php?key、默认Controller + action、分隔符 */
