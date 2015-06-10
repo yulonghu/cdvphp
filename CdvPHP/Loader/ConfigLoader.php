@@ -1,6 +1,6 @@
 <?php
 /**
- * 配置文件读取 (Config\Global.php)
+ * 配置文件读取 (Config\Global.php); 建议配置文件内容只允许读取
  *
  * @link http://www.cdvphp.com
  * @author <fanjiapeng@126.com>
@@ -56,6 +56,46 @@ class ConfigLoader
 		}
 
 		return self::$_configs;
+	}/*}}}*/
+
+	/**
+	 * 从配置文件读取具体某项的值
+	 *
+	 * 如果节点下是数组，则返回的数据是object类型
+	 *
+	 * Example #1
+	 *
+	 * <code>
+	 * print_r(ConfigLoader::getValue('db')->master->host);
+	 * </code>
+	 *
+	 * Example #2
+	 *
+	 * <code>
+	 * print_r(ConfigLoader::getValue('system')->template->path);
+	 * </code>
+	 *
+	 * @return mixed 
+	 */
+	public static function getValue($property)
+	{/*{{{*/
+		if(empty(self::$_configs))
+		{
+			self::$_configs = self::_loadFile();
+		}
+
+		if(!$property || !isset(self::$_configs[$property]))
+		{
+			return null;
+		}
+		
+		if(is_array(self::$_configs[$property]))
+		{
+			self::$_configs[$property] = json_encode(self::$_configs[$property]);
+			self::$_configs[$property] = json_decode(self::$_configs[$property]);
+		}
+
+		return self::$_configs[$property];
 	}/*}}}*/
 
 	/**

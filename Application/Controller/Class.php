@@ -122,6 +122,15 @@ class ClassController
 		echo '<hr>';
 		// 读取全部配置
 		print_r(ConfigLoader::getVars());
+		echo '<hr>';
+		// 读取数组子项
+		print_r(ConfigLoader::getValue('admin')); echo PHP_EOL;
+
+		print_r(ConfigLoader::getValue('db')->master);
+		print_r(ConfigLoader::getValue('db')->slave);
+
+		print_r(ConfigLoader::getValue('db')->master->host); echo PHP_EOL;
+		print_r(ConfigLoader::getValue('system')->template->path);
 		echo '</pre>';
 	}/*}}}*/
 
