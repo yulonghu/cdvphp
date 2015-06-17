@@ -19,8 +19,8 @@ class Session
 	 */
 	public function __construct()
 	{/*{{{*/
-
-		if(empty(session_id()))
+		$session_id = session_id();
+		if(empty($session_id))
 		{
 			session_start();
 		}
