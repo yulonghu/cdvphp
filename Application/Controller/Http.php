@@ -122,8 +122,8 @@ class HttpController extends AbstractBaseAction
 	public function files()
 	{/*{{{*/
 		var_dump($this->getRequest()->getFiles());
-		var_dump($this->request->getEnv('file'));
-		var_dump($this->request->getEnv('files_password', 666888));
+		var_dump($this->request->getFiles('file'));
+		var_dump($this->request->getFiles('files_password', 666888));
 	}/*}}}*/
 
 	/**
