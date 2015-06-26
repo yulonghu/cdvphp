@@ -4,9 +4,9 @@
  *
  * @link http://www.cdvphp.com
  * @author <fanjiapeng@126.com>
- * @package CdvPHP\Template
+ * @package CdvPHP\View
  */
-class Template
+class View
 {
 	/** @var array $subtemplates */
 	public $subtemplates = array();
@@ -175,12 +175,12 @@ class Template
 		$template = preg_replace_callback("/([\n\r\t]*)\{date\((.+?)\)\}([\n\r\t]*)/i",
 			function($mathes)
 			{
-				return isset($mathes[1]) ? $mathes[1] . template::datetags($mathes[2]) . $mathes[3] : '';
+				return isset($mathes[1]) ? $mathes[1] . view::datetags($mathes[2]) . $mathes[3] : '';
 			}, $template);
 		$template = preg_replace_callback("/([\n\r\t]*)\{eval\s+(.+?)\s*\}([\n\r\t]*)/is",
 			function($mathes)
 			{
-				return isset($mathes[1]) ? $mathes[1] . template::evaltags($mathes[2]) . $mathes[3] : '';
+				return isset($mathes[1]) ? $mathes[1] . view::evaltags($mathes[2]) . $mathes[3] : '';
 			}, $template);
 		$template = str_replace("{LF}", "<?=\"\\n\"?>", $template);
 
@@ -192,7 +192,7 @@ class Template
 		$template = preg_replace_callback("/\<\?\=\<\?\=$var_regexp\?\>\?\>/s",
 			function($mathes)
 			{
-				return isset($mathes[1]) ? template::addquote("<?={$mathes[1]}?>") : '';
+				return isset($mathes[1]) ? view::addquote("<?={$mathes[1]}?>") : '';
 			}, $template);
 
 		$headeradd = '';
@@ -211,28 +211,28 @@ class Template
 		$template = preg_replace_callback("/([\n\r\t]*)\{template\s+([a-z0-9_:\/]+)\}([\n\r\t]*)/is",
 			function($mathes)
 			{
-				return isset($mathes[1]) ? $mathes[1] . template::stripvtags("<? include \$this->init('{$mathes[2]}'); ?>") . $mathes[3] : '';
+				return isset($mathes[1]) ? $mathes[1] . view::stripvtags("<? include \$this->init('{$mathes[2]}'); ?>") . $mathes[3] : '';
 			}, $template);
 		$template = preg_replace_callback("/([\n\r\t]*)\{template\s+(.+?)\}([\n\r\t]*)/is",
 			function($mathes)
 			{
-				return isset($mathes[1]) ? $mathes[1] . template::stripvtags("<? include \$this->init('{$mathes[2]}'); ?>") . $mathes[3] : '';
+				return isset($mathes[1]) ? $mathes[1] . view::stripvtags("<? include \$this->init('{$mathes[2]}'); ?>") . $mathes[3] : '';
 			}, $template);
 		$template = preg_replace_callback("/([\n\r\t]*)\{echo\s+(.+?)\}([\n\r\t]*)/is",
 			function($mathes)
 			{
-				return $mathes[1] . template::stripvtags("<? echo {$mathes[2]}; ?>") . $mathes[3];
+				return $mathes[1] . view::stripvtags("<? echo {$mathes[2]}; ?>") . $mathes[3];
 			}, $template);
 		$template = preg_replace_callback("/([\n\r\t]*)\{if\s+(.+?)\}([\n\r\t]*)/is",
 			function($mathes)
 			{
-				return template::stripvtags("{$mathes[1]}<? if({$mathes[2]}) { ?>{$mathes[3]}");
+				return view::stripvtags("{$mathes[1]}<? if({$mathes[2]}) { ?>{$mathes[3]}");
 			}, $template);
 
 		$template = preg_replace_callback("/([\n\r\t]*)\{elseif\s+(.+?)\}([\n\r\t]*)/is",
 			function($mathes)
 			{
-				return template::stripvtags("{$mathes[1]}<? } elseif({$mathes[2]}) { ?>{$mathes[3]}");
+				return view::stripvtags("{$mathes[1]}<? } elseif({$mathes[2]}) { ?>{$mathes[3]}");
 			}, $template);
 		$template = preg_replace_callback("/\{else\}/i",
 			function($mathes)
@@ -247,12 +247,12 @@ class Template
 		$template = preg_replace_callback("/([\n\r\t]*)\{loop\s+(\S+)\s+(\S+)\}[\n\r\t]*/is",
 			function($mathes)
 			{
-				return template::stripvtags("{$mathes[1]}<? if(is_array({$mathes[2]})) foreach({$mathes[2]} as {$mathes[3]}) { ?>");
+				return view::stripvtags("{$mathes[1]}<? if(is_array({$mathes[2]})) foreach({$mathes[2]} as {$mathes[3]}) { ?>");
 			}, $template);
 		$template = preg_replace_callback("/([\n\r\t]*)\{loop\s+(\S+)\s+(\S+)\s+(\S+)\}[\n\r\t]*/is",
 			function($mathes)
 			{
-				return template::stripvtags("{$mathes[1]}<? if(is_array({$mathes[2]})) foreach({$mathes[2]} as {$mathes[3]} => {$mathes[4]}) { ?>");
+				return view::stripvtags("{$mathes[1]}<? if(is_array({$mathes[2]})) foreach({$mathes[2]} as {$mathes[3]} => {$mathes[4]}) { ?>");
 			}, $template);
 		$template = preg_replace_callback("/\{\/loop\}/i",
 			function($mathes)
@@ -280,17 +280,17 @@ class Template
 		$template = preg_replace_callback("/\"(http)?[\w\.\/:]+\?[^\"]+?&[^\"]+?\"/",
 			function($mathes)
 			{
-				return template::transamp("{$mathes[0]}");	
+				return view::transamp("{$mathes[0]}");	
 			}, $template);
 		$template = preg_replace_callback("/\<script[^\>]*?src=\"(.+?)\"(.*?)\>\s*\<\/script\>/is",
 			function($mathes)
 			{
-				return template::stripscriptamp("{$mathes[1]}", "{$mathes[2]}");
+				return view::stripscriptamp("{$mathes[1]}", "{$mathes[2]}");
 			}, $template);
 		$template = preg_replace_callback("/([\n\r\t]*)\{block\s+([a-zA-Z0-9_\[\]]+)\}(.+?)\{\/block\}/is",
 			function($mathes)
 			{
-				return $mathes[1] . template::stripblock("{$mathes[2]}", "{$mathes[3]}");
+				return $mathes[1] . view::stripblock("{$mathes[2]}", "{$mathes[3]}");
 			}, $template);
 		$template = preg_replace_callback("/\<\?(\s{1})/is", 
 			function($mathes)

@@ -8,7 +8,7 @@
  * @author <fanjiapeng@126.com>
  * @package Application\Controller
  */
-class ViewTestController extends Template
+class ViewTestController extends AbstractBaseAction
 {
 	/**
 	 * 模版测试
@@ -20,11 +20,11 @@ class ViewTestController extends Template
 	public function index()
 	{/*{{{*/
 		// assign 模版内变量赋值
-		$this->assign('a', 1);
-		$this->assign('data', array('user' => 'zhangsan', 'pass' => 123456));
-		$this->assign('name', 'xiaofan');
+		$this->getView()->assign('a', 1);
+		$this->getView()->assign('data', array('user' => 'zhangsan', 'pass' => 123456));
+		$this->getView()->assign('name', 'xiaofan');
 	
 		// 读取模版
-		$this->display();
+		$this->getView()->display();
 	}/*}}}*/
 }

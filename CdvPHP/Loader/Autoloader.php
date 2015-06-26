@@ -198,8 +198,9 @@ class Autoloader
 		$arr_data = array(
 			'BasePdo' => array('BasePdoCurd'),
 			'Loader'  => array('ConfigLoader'),
-			'Mvc' => array('View'),
-			'Template' => array('Tpl')
+			'Mvc' => array('AbstractBaseAction'),
+			'View' => array('Tpl'),
+			'Http' => array('HttpRequest', 'HttpResponse'),
 		);
 	
 		if($class_name)
