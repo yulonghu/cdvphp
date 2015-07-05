@@ -18,7 +18,7 @@ class RandLottery
      * $handle = new RandLottery();
      * print_r($handle->start($data));
      *
-     * #输出结果
+     * #输出结果, 多次运行结果是不一样的
      * Array
      * (
      *     [d] => 40
