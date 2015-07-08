@@ -9,12 +9,12 @@
 class RandLottery
 {
     /**
-     * 启动随机概率算法, 保证传入的数组结构体权重相加等于100
+     * 启动随机概率算法
      *
      * <pre>
      * # $data = array(key => 权重值)
      *
-     * $data = array('a' => 10, 'b' => 20, 'c' => 30, 'd' => 40);
+     * $data = array('a' => 10, 'b' => 20, 'c' => 30, 'd' => 40, 'e' => 40);
      * $handle = new RandLottery();
      * print_r($handle->start($data));
      *
@@ -39,7 +39,7 @@ class RandLottery
         }
         
         asort($data);
-        $random = rand(1, 100);
+        $random = rand(1, array_sum($data));
 
         foreach($data as $key => $val)
         {
