@@ -1,0 +1,35 @@
+<!--{subtemplate Book/header}-->
+    <div class="bs-docs-example">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th><i class="icon-user"></i> 留言作者</th>
+          <th><i class="icon-comment"></i> 留言内容</th>
+          <th><i class="icon-comment"></i> 管理员回复</th>
+		  <th><i class="icon-time"></i> 留言时间</th>
+          <th><i class="icon-th"></i> 管理</th>
+        </tr>
+      </thead>
+      <tbody>
+	  {if $data < 0 || !$data}
+	  <td colspan="6">没有任何记录.</td>
+	  {else}
+	  {loop $data $key $v}
+        <tr>
+          <td>{$v['id']}</td>
+          <td>{$v['name']}</td>
+          <td>{$v['content']}</td>
+          <td>{$v['reply']} </td>
+          <td>{echo date('Y-m-d H:i:s', $v['addtime'])}</td>
+          <td><a href="?method=Book.reply&id={$v['id']}" class="btn">回复</a> <a href="?method=Book.del&id={$v['id']}" class="btn btn-danger">删除</a></td>
+        </tr>
+	   {/loop}
+	   {/if}
+      </tbody>
+    </table>
+    <!--page start-->
+
+    <!--page end-->
+    </div>
+<!--{subtemplate Book/footer}-->

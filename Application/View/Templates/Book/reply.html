@@ -1,0 +1,36 @@
+<!--{subtemplate Book/header}-->
+    <div class="bs-docs-example">
+	
+	<div class="alert alert-error" style="display:none;">
+	</div>
+	
+	<form class="form-horizontal" method="post" action="?method=Book.postreply">
+	  <div class="control-group">
+		<label class="control-label" for="inputEmail">留言作者</label>
+		<div class="controls">
+		  <input type="text" name="name" class="input-xlarge" value="{$data['name']}" disabled />
+		</div>
+	  </div>
+	  <div class="control-group">
+		<label class="control-label" for="inputPassword">留言内容</label>
+		<div class="controls">
+		  <textarea rows="3" name="content" class="input-xlarge" disabled>{$data['content']}</textarea>
+		</div>
+	  </div>
+	  <hr />
+	  <div class="control-group">
+		<label class="control-label" for="inputPassword">回复内容</label>
+		<div class="controls">
+		  <textarea rows="3" name="reply" class="input-xlarge" placeholder="请填写回复信息">{$data['reply']}</textarea>
+		</div>
+	  </div>
+	  <div class="control-group">
+		<div class="controls">
+		  <button type="button" class="btn btn-primary" id="replysubmit">提交</button>
+		  <input type="hidden" name="replysubmit" value="1" />
+		  <input type="hidden" name="id" value="{$data['id']}" />
+		</div>
+	  </div>
+	</form>
+    </div>
+<!--{subtemplate Book/footer}-->

@@ -1,0 +1,28 @@
+<!--{subtemplate Book/header}-->
+    <div class="bs-docs-example">
+	
+	<div class="alert alert-error" style="display:none;">
+	</div>
+	
+	<form class="form-horizontal" method="post" action="?method=Book.postadd">
+	  <div class="control-group">
+		<label class="control-label" for="inputEmail">留言作者</label>
+		<div class="controls">
+		  <input type="text" name="name" class="input-xlarge" placeholder="请输入作者名称">
+		</div>
+	  </div>
+	  <div class="control-group">
+		<label class="control-label" for="inputPassword">留言内容</label>
+		<div class="controls">
+		  <textarea rows="3" name="content" class="input-xlarge" placeholder="请填写具体信息"></textarea>
+		</div>
+	  </div>
+	  <div class="control-group">
+		<div class="controls">
+		  <button type="button" class="btn btn-primary" id="addsubmit">提交</button>
+		  <input type="hidden" name="addsubmit" value="1" />
+		</div>
+	  </div>
+	</form>
+    </div>
+<!--{subtemplate Book/footer}-->

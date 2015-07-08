@@ -168,7 +168,7 @@ class Application
 				$str_input_value = isset($this->_gpc['g_'][$str_input_param]) ? $this->_gpc['g_'][$str_input_param] : FALSE;
 			}
 
-			if(!$str_input_value)
+			if($str_input_value === FALSE)
 			{
 				$bool_defalut_value = $param->isDefaultValueAvailable();
 			}
@@ -178,7 +178,7 @@ class Application
 				throw new RuntimeException("No {$str_input_param} param");
 			}
 
-			if($str_input_value)
+			if($str_input_value !== FALSE)
 			{
 				if(is_array($str_input_value))
 				{

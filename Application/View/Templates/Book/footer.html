@@ -1,0 +1,71 @@
+    <!--copyright start-->
+    <div class="bar" style="color:#777; margin-bottom:10px;">Copyright ©2005-2015 <a href="/">CdvPHP.com</a> All Rights Reserved</div>
+    <!--copyright end-->
+    
+</div> <!-- /container -->
+
+<!-- Modal Start-->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">系统提示</h3>
+  </div>
+  <div class="modal-body">
+    <p>确定要删除吗?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+	<a class="btn btn-primary" href="#" id="confirm">确认</a>
+  </div>
+</div>
+<!-- Modal End-->
+
+<script src="static/js/jquery-1.9.1.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/guestbook.js"></script>
+
+<script language="javascript">
+$(function(){
+	// 删除
+	$(".btn-danger").click(function(){
+		$('#myModal').modal('show');
+		$("#confirm").attr('href', $(this).attr('href'));
+		return false;
+	});
+	
+	$("#addsubmit").click(function(){
+		add();
+	});
+	
+	$("#replysubmit").click(function(){
+		add();
+	});
+	
+	// 提交
+	function add() {
+		$.ajax({
+			 type: "POST",
+			 url: $("form").attr("action"),
+			 data: $("form").serialize(),
+			 dataType: 'json',
+			 success: function(msg){
+				var data = msg.data;
+				if(msg.errno > 0)
+				{
+					data = msg.errmsg;
+				}
+				guestbook.notice(msg.errno, data);
+				$('form').get(0).reset();
+			 },
+			 error: function() {
+				 guestbook.notice(404, msg.data);
+			 }
+		});
+	}
+	
+	//$('#code').popover('toggle');
+	//$('#element').popover('show')
+})
+</script>
+</body>
+</html>

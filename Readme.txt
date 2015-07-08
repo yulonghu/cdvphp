@@ -65,5 +65,7 @@ Application\Library 开发者自定义类存放目录，命名规则 "类名Libr
 1. CdvPHP的未来需要大家的扶持与迭代，我们一起来参与开发吧！感谢所有对CdvPHP关注的朋友！
 2. 在线手册(有大量的例子)：http://www.cdvphp.com/help4/
 3. 根目录下：CdvPHP - User.sql  例子SQL脚步请导入到你的DB
-4. QQ群：26778603
+4. 首页: http://域名/index.php?method=Index.index
+5. 留言本、DB操作例子请先导入SQL脚本: CdvPHP - DB.sql
+6. QQ群：26778603
 
