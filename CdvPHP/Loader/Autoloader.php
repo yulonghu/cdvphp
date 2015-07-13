@@ -44,7 +44,7 @@ class Autoloader
 	{/*{{{*/
 		if(version_compare(PHP_VERSION, '5.3') < 0)
 		{
-			throw new RuntimeException('Minimum requirements PHP version 5.3');
+			trigger_error('Minimum requirements PHP version 5.3', E_USER_ERROR);
 		}
 	}/*}}}*/
 

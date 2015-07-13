@@ -38,13 +38,9 @@ class Logger
 
 		if(!is_dir($this->full_path))
 		{
-			try
+			if(@mkdir($this->full_path) === FALSE)
 			{
-				@mkdir($this->full_path);
-			}
-			catch(Exception $e)
-			{
-				throw new RuntimeException("Log directory mkdir failed!");	
+				trigger_error("{$this->full_path} mkdir failed!", E_USER_ERROR);
 			}
 		}
 	}/*}}}*/

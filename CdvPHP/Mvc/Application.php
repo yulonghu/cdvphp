@@ -68,14 +68,14 @@ class Application
 
 		if(strpos(Superglobal::$inputs['get'][$this->_config['app']['key']], $this->_config['app']['separator']) === FALSE)
 		{
-			throw new RuntimeException("{$this->_config['app']['key']} does not exist");
+			trigger_error("{$this->_config['app']['key']} does not exist", E_USER_ERROR);
 		}
 
 		$arr_method = explode($this->_config['app']['separator'], Superglobal::$inputs['get'][$this->_config['app']['key']]);
 
 		if(!isset($arr_method[1]) || empty($arr_method[1]))
 		{
-			throw new RuntimeException("Example: ?{$this->_config['app']['key']}={$this->_config['app']['controller']}{$this->_config['app']['separator']}{$this->_config['app']['action']}");
+			trigger_error("Example: ?{$this->_config['app']['key']}={$this->_config['app']['controller']}{$this->_config['app']['separator']}{$this->_config['app']['action']}", E_USER_ERROR);
 		}
 
 		Superglobal::$methods = array('class' => $arr_method[0], 'method' => $arr_method[1]);
@@ -85,13 +85,13 @@ class Application
 
 		if(!$this->_checkClassExists($arr_method[0]))
 		{
-			throw new RuntimeException("{$arr_method[0]} module not Found");
+			trigger_error("{$arr_method[0]} module not Found", E_USER_ERROR);
 		}
 
 		$obj_class = $this->_getObjects($arr_method[0]);
 		if(!$this->_checkMethodExists($obj_class, $arr_method[1]))
 		{
-			throw new RuntimeException("{$arr_method[1]} method not Found");
+			trigger_error("{$arr_method[1]} module not Found", E_USER_ERROR);
 		}
 
 		return $this->_setMapParams($arr_method[0], $arr_method[1]);
@@ -175,7 +175,7 @@ class Application
 
 			if($bool_defalut_value === FALSE && $str_input_value === FALSE)
 			{
-				throw new RuntimeException("No {$str_input_param} param");
+				trigger_error("No {$str_input_param} param", E_USER_ERROR);
 			}
 
 			if($str_input_value !== FALSE)

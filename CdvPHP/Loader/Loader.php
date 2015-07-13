@@ -106,7 +106,7 @@ class Loader
 	{/*{{{*/
 		if(empty($class_name) || is_array($class_name))
 		{
-			throw new RuntimeException('Loader class name error');
+			trigger_error('Loader class name error', E_USER_ERROR);
 		}
 	}/*}}}*/
 

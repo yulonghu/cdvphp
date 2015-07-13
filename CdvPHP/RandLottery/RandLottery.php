@@ -35,7 +35,7 @@ class RandLottery
 
         if(!is_array($data) || count($data) < 1)
         {
-            throw new RuntimeException('param data wrong');
+			trigger_error('param data wrong', E_USER_ERROR);
         }
         
         asort($data);

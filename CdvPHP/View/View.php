@@ -107,7 +107,7 @@ class View
 
 		if(!file_exists($tplfile))
 		{
-			throw new RuntimeException("template not found ({$tplfile})");
+			trigger_error("template not found ({$tplfile})", E_USER_ERROR);
 		}
 
 		if(file_exists($cachefile))
@@ -138,13 +138,13 @@ class View
 		$fp = @fopen($tplfile, 'rb');
 		if($fp === FALSE)
 		{
-			throw new RuntimeException("template not found ({$tplfile})");
+			trigger_error("template not found ({$tplfile})", E_USER_ERROR);
 		}
 	
 		$template = @fread($fp, filesize($tplfile));
 		if($template === FALSE)
 		{
-			throw new RuntimeException("template Can not read ({$tplfile})");
+			trigger_error("template Can not read ({$tplfile})", E_USER_ERROR);
 		}
 		fclose($fp);
 
@@ -274,7 +274,7 @@ class View
 			}, $template);
 
 		if(!@$fp = fopen($cachefile, 'w')) {
-            throw new RuntimeException("template cache file write failed ({$cachefile})");
+			trigger_error("template cache file write failed ({$cachefile})", E_USER_ERROR);
 		}
 
 		$template = preg_replace_callback("/\"(http)?[\w\.\/:]+\?[^\"]+?&[^\"]+?\"/",
