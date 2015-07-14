@@ -157,11 +157,12 @@ class Autoloader
 
 		if($arr_map)
 		{
-			spl_autoload(ROOT_PATH. "/Application/{$arr_map['root_path']}/{$arr_map['class_name']}");
+            // Notice: spl_autoload by default lowercase class name 
+            self::loadClass(ROOT_PATH. "/Application/{$arr_map['root_path']}/{$arr_map['class_name']}.php");
 		}
 		else
 		{
-			spl_autoload(FRAMEWORK_PATH. "/{$root_path}/{$filename}");
+            self::loadClass(FRAMEWORK_PATH. "/{$root_path}/{$filename}.php");
 		}
     }/*}}}*/
 
@@ -183,7 +184,6 @@ class Autoloader
 	 */
     private static function _autoload()
 	{/*{{{*/
-		spl_autoload_extensions('.php');
         spl_autoload_register(array('Autoloader', '_register'));
 	}/*}}}*/
 
