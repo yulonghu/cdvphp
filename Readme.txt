@@ -54,6 +54,7 @@ Application\Library 开发者自定义类存放目录，命名规则 "类名Libr
 12. View - 模版类
 13. Timer - 计时器
 14. Curl  - cURL封装类
+15. Cache - (Memcached类)
 
 【框架升级更新】
 
