@@ -20,31 +20,31 @@
  */
 class Sg extends Superglobal
 {
-	
+
 }
 abstract class Superglobal
 {
-	/** @var array $inputs 常用于获取$_GET、$_POST、$_COOKIE的值 */
-	public static $inputs = array(
-		'get' => array(),
-		'post' => array(),
-		'cookie' => array()
-	);
+    /** @var array $inputs 常用于获取$_GET、$_POST、$_COOKIE的值 */
+    public static $inputs = array(
+        'get' => array(),
+        'post' => array(),
+        'cookie' => array()
+    );
 
-	/** 
-	 * @var array $outputs 自定义输出 print_r(Superglobal::$outputs)
-	 */
-	public static $outputs = array();
+    /** 
+     * @var array $outputs 自定义输出 print_r(Superglobal::$outputs)
+     */
+    public static $outputs = array();
 
-	/** 
-	 * @var array $methods 解析method print_r(Superglobal::$methods)
-	 */
-	public static $methods = array();
+    /** 
+     * @var array $methods 解析method print_r(Superglobal::$methods)
+     */
+    public static $methods = array();
 
-	public static function __callStatic($name, $arguments)
-	{/*{{{*/
-		 // 注意: $name 的值区分大小写
+    public static function __callStatic($name, $arguments)
+    {/*{{{*/
+        // 注意: $name 的值区分大小写
         echo "Calling static method '$name' "
-             . implode(', ', $arguments). "\n";
-	}/*}}}*/
+            . implode(', ', $arguments). "\n";
+    }/*}}}*/
 }

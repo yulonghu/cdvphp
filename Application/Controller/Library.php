@@ -8,15 +8,15 @@
  */
 class LibraryController
 {
-	/**
-	 * index
-	 *
-	 * http://域名/index.php?method=Library.index
-	 *
-	 * @return string
-	 */
-	public function index()
-	{/*{{{*/
-		 echo Loader::getInstance('HttpLibrary')->get();
-	}/*}}}*/
+    /**
+     * index
+     *
+     * http://域名/index.php?method=Library.index
+     *
+     * @return string
+     */
+    public function index()
+    {/*{{{*/
+        echo Loader::getInstance('HttpLibrary')->get();
+    }/*}}}*/
 }

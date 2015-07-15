@@ -20,8 +20,8 @@ define('ROOT_PATH', dirname(__DIR__));
 
 // Cdv Autoloader (类库自动加载)
 if(is_dir(FRAMEWORK_PATH)) {
-	include FRAMEWORK_PATH . '/Loader/Autoloader.php';
-	Autoloader::init();
+    include FRAMEWORK_PATH . '/Loader/Autoloader.php';
+    Autoloader::init();
 }
 
 if (!class_exists('Autoloader')) {

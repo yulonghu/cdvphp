@@ -8,12 +8,12 @@
  */
 class HttpLibrary
 {
-	/**
-	 * get
-	 * @return string
-	 */
-	public function get()
-	{
-		echo 'HttpLibrary get';
-	}
+    /**
+     * get
+     * @return string
+     */
+    public function get()
+    {
+        echo 'HttpLibrary get';
+    }
 }

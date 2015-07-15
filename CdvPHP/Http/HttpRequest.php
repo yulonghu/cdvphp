@@ -36,8 +36,8 @@ class HttpRequest
     public function __construct()
     {/*{{{*/
         if(!defined('self::METHOD_' . $this->getServer('REQUEST_METHOD')))
-		{
-			trigger_error('A valid request method', E_USER_ERROR);
+        {
+            trigger_error('A valid request method', E_USER_ERROR);
         }
 
         $this->method = $this->getServer('REQUEST_METHOD');
@@ -67,7 +67,7 @@ class HttpRequest
     {/*{{{*/
         if($spec === null)
         {
-			trigger_error('Invalid value passed to setQuery(); must be either array of values or key/value pair', E_USER_ERROR);
+            trigger_error('Invalid value passed to setQuery(); must be either array of values or key/value pair', E_USER_ERROR);
         }
 
         if(is_array($spec))
@@ -117,7 +117,7 @@ class HttpRequest
     {/*{{{*/
         if($spec === null)
         {
-			trigger_error('Invalid value passed to setPost(); must be either array of values or key/value pair', E_USER_ERROR);
+            trigger_error('Invalid value passed to setPost(); must be either array of values or key/value pair', E_USER_ERROR);
         }
 
         if(is_array($spec))

@@ -33,7 +33,7 @@ abstract class AbstractBaseAction
     {
         if (!$this->request)
         {
-			$this->request = Loader::getInstance('HttpRequest');
+            $this->request = Loader::getInstance('HttpRequest');
         }
 
         return $this->request;
@@ -42,7 +42,7 @@ abstract class AbstractBaseAction
     /**
      * Get response object; 开发中
      * @return object
-	 */
+     */
     public function getResponse()
     {
         if (!$this->response)
@@ -51,7 +51,7 @@ abstract class AbstractBaseAction
         }
 
         return $this->response;
-	}
+    }
 
     /**
      * Get view object
@@ -61,7 +61,7 @@ abstract class AbstractBaseAction
     {
         if (!$this->view)
         {
-			$this->view = Loader::getInstance('view');
+            $this->view = Loader::getInstance('view');
         }
 
         return $this->view;

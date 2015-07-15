@@ -115,7 +115,7 @@ class HttpResponse
      * @return bool true成功 
      */
     public function end()
-	{/*{{{*/
+    {/*{{{*/
         echo self::$_content;
         exit(0);
     }/*}}}*/

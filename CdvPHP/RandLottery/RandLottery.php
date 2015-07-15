@@ -35,9 +35,9 @@ class RandLottery
 
         if(!is_array($data) || count($data) < 1)
         {
-			trigger_error('param data wrong', E_USER_ERROR);
+            trigger_error('param data wrong', E_USER_ERROR);
         }
-        
+
         asort($data);
         $random = rand(1, array_sum($data));
 

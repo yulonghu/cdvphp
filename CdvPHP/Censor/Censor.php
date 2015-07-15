@@ -10,18 +10,18 @@
  */
 Class Censor
 {
-	/*
-	 * @var string $_words 屏蔽的关键词列表
-	 */
-	private $_words = null;
-	public function __construct()
-	{
-		$this->_words = 
-'*葛毛毛*
-*GM*
-*官方发言人*
-*客服*
-*qbj*
+    /*
+     * @var string $_words 屏蔽的关键词列表
+     */
+    private $_words = null;
+    public function __construct()
+    {
+        $this->_words = 
+            '*葛毛毛*
+            *GM*
+            *官方发言人*
+            *客服*
+            *qbj*
 risiqbj
 官方策划
 *GM*
@@ -97,25 +97,25 @@ risiqbj
 *藏独*
 *3D程序工程师*
 *小*次*';
-	}
+    }
 
-	/**
-	 * 检查非法关键字 
-	 *
-	 * @param string $string  内容
-	 *
-	 * @return boolean  如果字符串里包含非法关键字, 返回结果true, 否则返回false
-	 */
-	public function checkFilterWord($string)
-	{/*{{{*/
-		$censorexp = '/^('.str_replace(array('\\*', "\r\n", "\n", ' '), array('.*', '|', '|', ''), preg_quote(($this->_words = trim($this->_words)), '/')).')$/i';
-		if($this->_words && preg_match($censorexp, $string))
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
-	}/*}}}*/
+    /**
+     * 检查非法关键字 
+     *
+     * @param string $string  内容
+     *
+     * @return boolean  如果字符串里包含非法关键字, 返回结果true, 否则返回false
+     */
+    public function checkFilterWord($string)
+    {/*{{{*/
+        $censorexp = '/^('.str_replace(array('\\*', "\r\n", "\n", ' '), array('.*', '|', '|', ''), preg_quote(($this->_words = trim($this->_words)), '/')).')$/i';
+        if($this->_words && preg_match($censorexp, $string))
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }/*}}}*/
 }
