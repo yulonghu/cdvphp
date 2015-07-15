@@ -156,10 +156,10 @@ class Autoloader
 		}
 
 		if($arr_map)
-		{
+        {
             // Notice: spl_autoload by default lowercase class name 
             self::loadClass(ROOT_PATH. "/Application/{$arr_map['root_path']}/{$arr_map['class_name']}.php");
-		}
+        }
 		else
 		{
             self::loadClass(FRAMEWORK_PATH. "/{$root_path}/{$filename}.php");
@@ -201,6 +201,7 @@ class Autoloader
 			'Mvc' => array('AbstractBaseAction'),
 			'View' => array('Tpl'),
 			'Http' => array('HttpRequest', 'HttpResponse'),
+            'Cache' => array('MemcachedCache', 'CacheInterface'),
 		);
 	
 		if($class_name)
