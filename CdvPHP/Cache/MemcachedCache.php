@@ -4,8 +4,7 @@
  *
  * <pre>
  * MemcachedCache::$servers = array(array('10.16.57.205', 11212));
- * $mcd = new MemcachedCache();
- * $mcd->addServer();
+ * $mcd = Loader::getInstance('MemcachedCache');
  * print_r($mcd->getServer());
  * var_dump($mcd->set('abcd', 1));
  * </pre>
@@ -25,10 +24,19 @@ class MemcachedCache implements CacheInterface
     public $compress = TRUE;
     /** @var bool $tcp_nodelay */
     public $tcp_nodelay = TRUE;
+
     /** @var string $prefix_key */
     public $prefix_key = '';
     /** @var array $_mcd */
     private $_mcd = null;
+
+    /**
+     * auto addserver
+     */
+    public function __construct()
+    {/*{{{*/
+       return $this->addserver();
+    }/*}}}*/
 
     /**
      * addserver

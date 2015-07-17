@@ -180,7 +180,7 @@ class ClassController
     {/*{{{*/
         /* 例子 1 */
         MemcachedCache::$servers = array(array('127.0.0.1', 11212));
-        $mc = Loader::getInstance('MemcachedCache')->addServer();
+        $mc = Loader::getInstance('MemcachedCache');
         var_dump($mc->set('aaa', 1));
         print_r($mc);
 
