@@ -201,7 +201,7 @@ class Autoloader
             'Mvc' => array('AbstractBaseAction'),
             'View' => array('Tpl'),
             'Http' => array('HttpRequest', 'HttpResponse'),
-            'Cache' => array('MemcachedCache', 'CacheInterface'),
+            'Cache' => array('MemcachedCache', 'CacheInterface', 'RedisCache'),
         );
 
         if($class_name)

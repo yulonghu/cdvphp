@@ -3,9 +3,8 @@
  * Memcached 封装类
  *
  * <pre>
- * MemcachedCache::$servers = array(array('10.16.57.205', 11212));
+ * MemcachedCache::$servers = array(array('127.0.0.1', 11212));
  * $mcd = Loader::getInstance('MemcachedCache');
- * print_r($mcd->getServer());
  * var_dump($mcd->set('abcd', 1));
  * </pre>
  *
@@ -35,7 +34,10 @@ class MemcachedCache implements CacheInterface
      */
     public function __construct()
     {/*{{{*/
-       return $this->addserver();
+        if(!empty(self::$servers))
+        {
+            $this->addserver();
+        }
     }/*}}}*/
 
     /**
@@ -89,10 +91,25 @@ class MemcachedCache implements CacheInterface
             }
 
             $this->_mcd->addServers($servers);
+            if(!$this->_checkConnection())
+            {
+                trigger_error('Memcached addServer failed', E_USER_ERROR);
+            }
+
             self::$memcached[$key] = $this->_mcd;
         }
 
         return $this->_mcd;
+    }/*}}}*/
+
+    /**
+     * 检查MC是否正常连接
+     * @return bool true成功 否则失败
+     */
+    private function _checkConnection()
+    {/*{{{*/
+        $this->_mcd->set('cdvphp_test_mcd', 1, 3);
+        return ($this->_mcd->getResultCode() == Memcached::RES_SUCCESS);
     }/*}}}*/
     
     /**

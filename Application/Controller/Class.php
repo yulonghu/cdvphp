@@ -168,30 +168,6 @@ class ClassController
     }/*}}}*/
 
     /**
-     * Memcached例子
-     *
-     * 两种不同的addServer方法, 原生memcached命令支持
-     *
-     * http://域名/index.php?method=class.mc
-     *
-     * @return mixed
-     */
-    public function mc()
-    {/*{{{*/
-        /* 例子 1 */
-        MemcachedCache::$servers = array(array('127.0.0.1', 11212));
-        $mc = Loader::getInstance('MemcachedCache');
-        var_dump($mc->set('aaa', 1));
-        print_r($mc);
-
-        /* 例子 2 */
-        $mc = Loader::getInstance('MemcachedCache');
-        $mc->setServer(array(array('127.0.0.1', 11212)));
-        var_dump($mc->set('aaa', 1));
-        print_r($mc);
-    }/*}}}*/
-
-    /**
      * 程序执行结束，输出花费了多少时间
      *
      * @return int
