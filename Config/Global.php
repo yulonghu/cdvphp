@@ -58,6 +58,12 @@ $system = array(
         'controller' => 'index',
         'action' => 'index'
     ),
+
+    /**
+     * 自动输出格式, 默认PHP不做任何转换(注意大小写)
+     * 支持3种: php、json、jsonApi
+     */
+    'outputformat' => 'php'
 );
 
 /**
