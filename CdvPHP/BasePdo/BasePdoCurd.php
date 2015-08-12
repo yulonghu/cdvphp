@@ -75,7 +75,7 @@ abstract class BasePdoCurd
 
         if($arr_where_key)
         {
-            $where = implode(',', $arr_where_key);
+            $where = implode(' AND ', $arr_where_key);
             $sql = "{$cmd} %s SET {$set} WHERE {$where}";
         }
         else
