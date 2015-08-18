@@ -11,17 +11,17 @@
 abstract class AbstractBaseAction
 {
     /**
-     * @var Request
+     * @var request
      */
     protected $request = null;
 
     /**
-     * @var Response
+     * @var response
      */
     protected $response = null;
 
     /**
-     * @var View
+     * @var view
      */
     protected $view = null;
 
@@ -40,7 +40,7 @@ abstract class AbstractBaseAction
     }
 
     /**
-     * Get response object; 开发中
+     * Get response object
      * @return object
      */
     public function getResponse()

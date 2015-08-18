@@ -6,7 +6,7 @@
  *
  * @link http://www.cdvphp.com
  * @author <fanjiapeng@126.com>
- * @package Application\Controller
+ * @package Application\Constants
  */
 class Constants
 {

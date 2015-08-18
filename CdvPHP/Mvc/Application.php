@@ -34,6 +34,8 @@ class Application
      */
     public function run()
     {/*{{{*/
+        Loader::getInstance('Timer')->start();
+
         $this->_gpc = array(
             'p_' => & $_POST,
             'g_' => & $_GET,
@@ -48,8 +50,9 @@ class Application
 
         $this->_config = ConfigLoader::getVar('system');
 
-        $this->_dispatch();
+        $data = $this->_dispatch();
         $this->_log();
+        $this->_api($data);
     }/*}}}*/
 
     /**
@@ -206,6 +209,24 @@ class Application
         if(isset($this->_config['log']['website']) && $this->_config['log']['website'])
         {
             Loader::getInstance('Logger')->siteInfo();
+        }
+    }/*}}}*/
+
+    /**
+     * _api
+     *
+     * @return boolean
+     */
+    private function _api(& $data = '')
+    {/*{{{*/
+        if(isset($this->_config['output_format']) && $this->_config['output_format'] == 'api')
+        {
+            Loader::getInstance('HttpResponse')->endJson(array(
+                'errno' => 0,
+                'errmsg' => '',
+                'consume' => round(Loader::getInstance('Timer')->end(), 6),
+                'data' => $data ? $data : ''
+            ));
         }
     }/*}}}*/
 }

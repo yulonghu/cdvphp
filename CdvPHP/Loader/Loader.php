@@ -52,8 +52,32 @@ class Loader
         $class_name = ucfirst($class_name);
         if(!isset($obj->_class[$class_name]))
         {
-            $obj->_class[$class_name] =  new $class_name();
+            $obj->_class[$class_name] = new $class_name();
         }
+
+        return $obj->_class[$class_name];
+    }/*}}}*/
+
+    /**
+     * 类实例化, 非单例, 如果找不到类, 抛出异常
+     *
+     * Example #1
+     *
+     * <code>
+     * $handle = Loader::get('classname');
+     * </code>
+     *
+     * @param string $class_name 类名
+     *
+     * @return object  
+     */
+    public static function get($class_name)
+    {/*{{{*/
+        self::_checkClassName($class_name);
+        $obj = self::_init();
+
+        $class_name = ucfirst($class_name);
+        $obj->_class[$class_name] = new $class_name();
 
         return $obj->_class[$class_name];
     }/*}}}*/

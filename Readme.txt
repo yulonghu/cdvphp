@@ -37,6 +37,10 @@ Application\Library 开发者自定义类存放目录，命名规则 "类名Libr
 4. 类加载例子: Class.php
 5. 模版例子: ViewTest.php
 6. 自定义类使用例子: Library.php
+7. 留言本例子：Book.php
+8. Redis、Memcached例子：Cache.php
+9. 输出Json格式API接口例子：Api.php
+10. 框架入门首页：Index.php
 
 【框架 - 已经封装的类库说明; 详细手册预计跟官网一起上线】
 
@@ -45,7 +49,7 @@ Application\Library 开发者自定义类存放目录，命名规则 "类名Libr
 3. Code - 验证码
 4. cURL - curl封装类
 5. HashTable - 分表分库
-6. Http - request（获取全局数组）、reponse（输出）
+6. Http - request（获取全局数组）、reponse（输出）、Api输出类
 7. Logger - 日志记录
 8. RandLottery - 根据权重比例随机算法类
 9. Session - 会话
@@ -54,7 +58,7 @@ Application\Library 开发者自定义类存放目录，命名规则 "类名Libr
 12. View - 模版类
 13. Timer - 计时器
 14. Curl  - cURL封装类
-15. Cache - (Memcached类)
+15. Cache - (Memcached类、Redis类)
 
 【框架升级更新】
 

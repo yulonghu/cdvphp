@@ -19,7 +19,8 @@ if(class_exists('Autoloader'))
 class Autoloader
 {
     /** @var array $_ext 初始化来自于dispatch类库位置 */
-    private static $_ext = array('Controller', 'Logic', 'Model', 'Library');
+    private static $_ext  = array('Controller', 'Logic', 'Model', 'Library');
+    private static $_cons = array('Constants');
 
     /**
      * 初始化时区、类库、lazyloading、Handler
@@ -57,7 +58,7 @@ class Autoloader
     {/*{{{*/
         $config = ConfigLoader::getVar('system');
 
-        if(!isset($config['log']['debug']) || !$config['log']['debug'])
+        if(isset($config['log']['debug']) && !$config['log']['debug'])
         {
             error_reporting(0);
             set_error_handler('Autoloader::_errorHandler');
@@ -66,7 +67,9 @@ class Autoloader
         }
         else
         {
+            // display_errors权限高, 控制整个PHP错误信息, 它只有两种状态要么开启、要么关闭
             ini_set('display_errors', 1);
+            // 可以选择性的关闭或者说忽略某些不想要的错误提示
             error_reporting(E_ALL);
         }
     }/*}}}*/
@@ -200,7 +203,7 @@ class Autoloader
             'Loader'  => array('ConfigLoader'),
             'Mvc' => array('AbstractBaseAction'),
             'View' => array('Tpl'),
-            'Http' => array('HttpRequest', 'HttpResponse'),
+            'Http' => array('HttpRequest', 'HttpResponse', 'BizResult'),
             'Cache' => array('MemcachedCache', 'CacheInterface', 'RedisCache'),
         );
 
@@ -225,6 +228,10 @@ class Autoloader
     private static function _userAutoload($class_name)
     {/*{{{*/
         $arr_map = '';
+        if(in_array($class_name, self::$_cons))
+        {
+            $arr_map = array('root_path' => self::$_cons[0], 'class_name' => $class_name);
+        }
         if(strpos($class_name, self::$_ext[0]) !== FALSE && substr($class_name, -10) == self::$_ext[0])
         {
             $arr_map = array('root_path' => self::$_ext[0], 'class_name' => substr($class_name, 0, -10));

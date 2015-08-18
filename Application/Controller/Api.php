@@ -4,6 +4,8 @@
  *
  * 常用于客户端与服务端接口交互(Android、Iphone、Winform)
  *
+ * Global.php 对应配置'output_format' => 'api'
+ *
  * @link http://www.cdvphp.com
  * @author <fanjiapeng@126.com>
  * @package Application\Controller

@@ -106,6 +106,23 @@ class HttpResponse
     }/*}}}*/
 
     /**
+     * 把内容转换成endJson
+     *
+     * <code>
+     * echo $this->getResponse()->endJson();
+     * </code>
+     *
+     * @return json
+     */
+    public function endJson($data = '')
+    {/*{{{*/
+        header('Content-type: application/json');
+        header('Cache-control: no-store');
+        echo json_encode($data ? $data : self::$_content);
+        exit(0);
+    }/*}}}*/
+
+    /**
      * 发送响应给请求端
      *
      * <code>
@@ -114,9 +131,9 @@ class HttpResponse
      *
      * @return bool true成功 
      */
-    public function end()
+    public function end($data = '')
     {/*{{{*/
-        echo self::$_content;
+        echo $data ? $data : self::$_content;
         exit(0);
     }/*}}}*/
 
