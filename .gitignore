@@ -1,2 +1,2 @@
-Log/*.log
+Log/*.log.*
 Application/View/TemplatesCache/*
