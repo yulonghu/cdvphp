@@ -6,6 +6,39 @@
 4. Log - 站点日志记录文件，Log文件会自动创建
 5. Public - 入口页了(首页就不区分大小写了)
 
+【WebServer配置】
+
+    #Nginx配置
+
+    server
+    {
+        listen 80; 
+        index index.php;
+
+        server_name test.cdvphp.cn;
+        root /home/fanjiapeng/test/cdvphp/Public;
+        access_log /data/nginx/logs/fanjiapeng/access_log;
+        error_log /data/nginx/logs/fanjiapeng/error_log;
+
+        location ~* \.php$ 
+        {   
+            fastcgi_pass 127.0.0.1:9000;
+            include fastcgi.conf;
+            fastcgi_index index.php;
+        }
+    }
+
+    #Apache配置; conf/extra/httpd-vhosts.conf
+
+    <VirtualHost *:80>
+        ServerAdmin admin@cdvphp.cn
+        DocumentRoot "/home/fanjiapeng/test/cdvphp/Public"
+        ServerName test.cdvphp.cn
+        ServerAlias test.cdvphp.cn
+        ErrorLog "logs/cdv.cn-error.log"
+        CustomLog "logs/cdv.cn-access.log" common
+    </VirtualHost>
+
 【运行框架】
 
 1. WEB服务器解析到Public目录  -- 就可以运行了，一切都很简单吧！
