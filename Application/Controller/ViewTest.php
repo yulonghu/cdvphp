@@ -27,4 +27,21 @@ class ViewTestController extends AbstractBaseAction
         // 读取模版
         $this->getView()->display();
     }/*}}}*/
+
+    /**
+     * 自定义模版输出测试
+     *
+     * 模板模板加载的路径, 来自于Global.php配置文件 template\path 配置项
+     *
+     * http://域名/index.php?method=ViewTest.customTpl
+     *
+     * @return void
+     */
+    public function customTpl()
+    {/*{{{*/
+        // 带目录的模板加载
+        $this->getView()->display('Tmp/custom');
+        // 不带目录的模板加载; 需要新建 View/Templates/custom.html 文件
+        // $this->getView()->display('custom');
+    }/*}}}*/
 }

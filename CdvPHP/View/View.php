@@ -17,16 +17,17 @@ class View
 
     /**
      * 读取模版
+     * @param string $custom_tpl 自定义模板; 传入模板需要带文件名, 不用带后缀
      * @return string
      */
-    public function display()
+    public function display($custom_tpl = '')
     {/*{{{*/
         define('IN_TEMPLATE', TRUE);
 
         $arr_data = Superglobal::$methods;
         extract($this->_extract);
 
-        include $this->init("{$arr_data['class']}/{$arr_data['method']}");
+        include $custom_tpl ? $this->init($custom_tpl) : $this->init("{$arr_data['class']}/{$arr_data['method']}");
     }/*}}}*/
 
     /**
