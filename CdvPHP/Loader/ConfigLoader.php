@@ -34,7 +34,17 @@ class ConfigLoader
             self::$_configs = self::_loadFile();
         }
 
-        return ($property && isset(self::$_configs[$property])) ? self::$_configs[$property] : null;
+        if(!$property || !isset(self::$_configs[$property]))
+        {
+            return null;
+        }
+
+        if(is_object(self::$_configs[$property]))
+        {
+            self::$_configs[$property] = json_decode(json_encode(self::$_configs[$property]), TRUE);
+        }
+
+        return self::$_configs[$property];
     }/*}}}*/
 
     /**
@@ -91,8 +101,7 @@ class ConfigLoader
 
         if(is_array(self::$_configs[$property]))
         {
-            self::$_configs[$property] = json_encode(self::$_configs[$property]);
-            self::$_configs[$property] = json_decode(self::$_configs[$property]);
+            self::$_configs[$property] = json_decode(json_encode(self::$_configs[$property]));
         }
 
         return self::$_configs[$property];
