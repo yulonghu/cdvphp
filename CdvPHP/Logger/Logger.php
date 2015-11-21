@@ -51,11 +51,11 @@ class Logger
      * @param string $msg 记录的内容 
      * @return void
      */
-    public function siteInfo($msg = '')
+    public function siteInfo($reponse = '')
     {/*{{{*/
-        if(!empty($msg))
+        if(!empty($reponse))
         {
-            $info['msg'] = $msg; 
+            $info['reponse'] = $reponse; 
         }
 
         $info['get'] = isset($_GET) ? $_GET : '';

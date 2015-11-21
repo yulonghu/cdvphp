@@ -24,19 +24,10 @@ class Application
      */
     public static function init()
     {/*{{{*/
-        return new self();
-    }/*}}}*/
-
-    /**
-     * 全局变量托管、website.log日志记录、MVC调度器
-     *
-     * @return void
-     */
-    public function run()
-    {/*{{{*/
         Loader::getInstance('Timer')->start();
+        $self = new self();
 
-        $this->_gpc = array(
+        $self->_gpc = array(
             'p_' => & $_POST,
             'g_' => & $_GET,
             'c_' => & $_COOKIE
@@ -48,11 +39,23 @@ class Application
             'cookie' => $_COOKIE
         );
 
-        $this->_config = ConfigLoader::getVar('system');
+        $self->_config = ConfigLoader::getVar('system');
 
+        return $self;
+    }/*}}}*/
+
+    /**
+     * 全局变量托管、website.log日志记录、MVC调度器
+     *
+     * @return void
+     */
+    public function run()
+    {/*{{{*/
         $data = $this->_dispatch();
-        $this->_log();
-        $this->_api($data);
+        $this->_Output($data);
+
+        unset($data);
+        exit(0);
     }/*}}}*/
 
     /**
@@ -200,33 +203,20 @@ class Application
     }/*}}}*/
 
     /**
-     * _log
+     * _Output
+     * @param mixed $data
      *
-     * @return boolean
+     * @return void
      */
-    private function _log()
-    {/*{{{*/
-        if(isset($this->_config['log']['website']) && $this->_config['log']['website'])
-        {
-            Loader::getInstance('Logger')->siteInfo();
-        }
-    }/*}}}*/
-
-    /**
-     * _api
-     *
-     * @return boolean
-     */
-    private function _api(& $data = '')
+    private function _Output(& $data = '')
     {/*{{{*/
         if(isset($this->_config['output_format']) && $this->_config['output_format'] == 'api')
         {
-            Loader::getInstance('HttpResponse')->endJson(array(
-                'errno' => 0,
-                'errmsg' => '',
-                'consume' => round(Loader::getInstance('Timer')->end(), 6),
-                'data' => $data ? $data : ''
-            ));
+            BizResult::output(0, $data);
+        }
+        else
+        {
+            Loader::getInstance('Logger')->siteInfo();
         }
     }/*}}}*/
 }

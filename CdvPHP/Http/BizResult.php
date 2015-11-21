@@ -18,7 +18,7 @@ class BizResult
     {/*{{{*/
         if(!is_null($result))
         {
-            self::throwError($code);
+            self::output($code);
         }
         return $result;
     }/*}}}*/
@@ -33,7 +33,7 @@ class BizResult
     {/*{{{*/
         if(is_null($result))
         {
-            self::throwError($code);
+            self::output($code);
         }
         return $result;
     }/*}}}*/
@@ -48,7 +48,7 @@ class BizResult
     {/*{{{*/
         if(empty($result))
         {
-            self::throwError($code);
+            self::output($code);
         }
         return $result;
     }/*}}}*/
@@ -63,7 +63,7 @@ class BizResult
     {/*{{{*/
         if(!empty($result))
         {
-            self::throwError($code);
+            self::output($code);
         }
         return $result;
     }/*}}}*/
@@ -78,7 +78,7 @@ class BizResult
     {/*{{{*/
         if($result === false)
         {
-            self::throwError($code);
+            self::output($code);
         }
         return $result;
     }/*}}}*/
@@ -93,7 +93,7 @@ class BizResult
     {/*{{{*/
         if($result !== false)
         {
-            self::throwError($code);
+            self::output($code);
         }
         return $result;
     }/*}}}*/
@@ -108,7 +108,7 @@ class BizResult
     {/*{{{*/
         if(true !== $result)
         {
-            self::throwError($code);
+            self::output($code);
         }
         return $result;
     }/*}}}*/
@@ -117,13 +117,16 @@ class BizResult
      * 直接抛出异常
      * @return mixed
      */
-    static public function throwError($code)
+    static public function output($code = 0, $data = '')
     {/*{{{*/
-        Loader::getInstance('HttpResponse')->endJson(array(
+        $arr_msg = array(
             'errno' => $code,
             'errmsg' => isset(Constants::$ErrorDescription[$code]) ? Constants::$ErrorDescription[$code] : '',
             'consume' => round(Loader::getInstance('Timer')->end(), 6),
-            'data' => ''
-        ));
+            'data' => $data === null ? '' : $data
+        );
+
+        Loader::getInstance('Logger')->siteInfo($arr_msg);
+        Loader::getInstance('HttpResponse')->endJson($arr_msg);
     }/*}}}*/
 }
