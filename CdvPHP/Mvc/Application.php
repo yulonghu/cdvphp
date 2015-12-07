@@ -55,7 +55,6 @@ class Application
         $this->_Output($data);
 
         unset($data);
-        exit(0);
     }/*}}}*/
 
     /**

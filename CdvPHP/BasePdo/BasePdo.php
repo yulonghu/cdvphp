@@ -190,7 +190,7 @@ class BasePdo extends BasePdoCurd
      * </code>
      *
      * @param string $sql
-     * @param array $values 如果没有值, 传空"" 或 array() 都可以
+     * @param array  $values 如果没有值, 传空"" 或 array() 都可以
      *
      * @return array
      */
@@ -291,7 +291,7 @@ class BasePdo extends BasePdoCurd
     /**
      * (见官网说明)执行一条 SQL 语句，并返回受影响的行数
      *
-     * 推荐使用execNoQuery | execute方法
+     * 推荐使用execNotQuery | execute方法
      *
      * 如果debug === true 记录sql执行全程日志
      *
@@ -377,6 +377,7 @@ class BasePdo extends BasePdoCurd
      * </code>
      *
      * @param string $sql
+     * @param array  $values
      * @return boolean true代表成功, 否则失败
      */
     public function execNotQuery($sql, $values = array())
@@ -406,6 +407,18 @@ class BasePdo extends BasePdoCurd
         }
 
         return $bool_result;
+    }/*}}}*/
+
+    /**
+     * alias execNotQuery
+     *
+     * @param string $sql
+     * @param array  $values
+     * @return boolean 
+     */
+    public function execNoQuery($sql, $values = array())
+    {/*{{{*/
+        return $this->execNotQuery($sql, $values);
     }/*}}}*/
 
     /**
@@ -513,21 +526,23 @@ class BasePdo extends BasePdoCurd
      *
      * @return void
      */
-    private function __clone(){}
+    private function __clone()
+    {/*{{{*/
+    }/*}}}*/
 
-        /**
-         * 魔术方法 __call
-         *
-         * @param string $name
-         * @param array $args
-         *
-         * return mixed
-         */
-        public function __call($name, $args)
-        {/*{{{*/
-            $callback = array($this->_pdo, $name);
-            return call_user_func_array($callback , $args);
-        }/*}}}*/
+    /**
+     * 魔术方法 __call
+     *
+     * @param string $name
+     * @param array $args
+     *
+     * return mixed
+     */
+    public function __call($name, $args)
+    {/*{{{*/
+        $callback = array($this->_pdo, $name);
+        return call_user_func_array($callback , $args);
+    }/*}}}*/
 
     /**
      * 脚步执行完, 自动释放db资源

@@ -143,4 +143,10 @@ class BookController extends AbstractBaseAction
 
         exit(0);
     }/*}}}*/
+
+    public function getCount()
+    {
+        echo Loader::getInstance('BookModel')->getCount();
+        exit(0);
+    }
 }

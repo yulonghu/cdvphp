@@ -72,8 +72,8 @@ $system = array(
  * @global array $db
  */
 $db = array(
-    'master' => array('host' => '127.0.0.1', 'username' => 'root', 'password' => '', 'port' => 3306, 'dbname' => 'cdvphp_new'),
-    'slave'  => array('host' => '127.0.0.1', 'username' => 'root', 'password' => '', 'port' => 3306, 'dbname' => 'cdvphp_new'),
+    'master' => array('host' => '127.0.0.1', 'username' => 'root', 'password' => 'cdv123456', 'port' => 3306, 'dbname' => 'cdvphp_new'),
+    'slave'  => array('host' => '127.0.0.1', 'username' => 'root', 'password' => 'cdv123456', 'port' => 3306, 'dbname' => 'cdvphp_new'),
 );
 
 /** @var string $admin 测试做例子用 */

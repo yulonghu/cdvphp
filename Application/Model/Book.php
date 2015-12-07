@@ -127,4 +127,10 @@ class BookModel extends BasePdo
 
         return $this->update($row, array('id' => $id));
     }/*}}}*/
+
+    public function getCount($condition = array())
+    {
+        $this->init('slave');
+        return parent::getCount($condition);
+    }
 }

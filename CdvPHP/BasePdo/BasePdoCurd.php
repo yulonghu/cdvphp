@@ -39,7 +39,7 @@ abstract class BasePdoCurd
     }/*}}}*/
 
     /**
-     * 更新操作封装, 最后调用 BasePdo::execNotQuery()
+     * 更新操作封装, 最后调用 BasePdo::execNoQuery()
      *
      * @param array $data array('user' => 'cdvphp', 'pass' => 123456)
      * @param array $condition array('id' => 1)
@@ -85,11 +85,11 @@ abstract class BasePdoCurd
 
         $sql = sprintf($sql, $this->getTable());
 
-        return $this->execNotQuery($sql, $arr_value);
+        return $this->execNoQuery($sql, $arr_value);
     }/*}}}*/
 
     /**
-     * 更新操作封装, 最后调用 BasePdo::execNotQuery()
+     * 更新操作封装, 最后调用 BasePdo::execNoQuery()
      *
      * @param array $data array('user' => 'cdvphp', 'pass' => 123456)
      * @param boolean $retrun_insert_id 如果等于true, 则返回本次插入的lastInsertId, 否则返回本次操作boolean结果
@@ -115,7 +115,7 @@ abstract class BasePdoCurd
         $cmd = $replace ? 'REPLACE INTO' : 'INSERT INTO';
         $sql = sprintf("{$cmd} %s SET {$set}", $this->getTable());
 
-        $bool_result = $this->execNotQuery($sql, $arr_value);
+        $bool_result = $this->execNoQuery($sql, $arr_value);
 
         return ($retrun_insert_id && $bool_result) ? $this->lastInsertId() : $bool_result;
     }/*}}}*/
@@ -135,7 +135,7 @@ abstract class BasePdoCurd
     }/*}}}*/
 
     /**
-     * 删除操作封装, 最后调用 BasePdo::execNotQuery()
+     * 删除操作封装, 最后调用 BasePdo::execNoQuery()
      *
      * @param array $condition array('user' => 'cdvphp', 'id' => 1)
      * @param int $limit  担心误删多条, 自定义删除limit条数
@@ -161,22 +161,59 @@ abstract class BasePdoCurd
         $sql = "DELETE FROM %s WHERE {$where} {$limit}";
         $sql = sprintf($sql, $this->getTable());
 
-        return $this->execNotQuery($sql, $arr_value);
+        return $this->execNoQuery($sql, $arr_value);
     }/*}}}*/
 
     /**
-     * 简易删除操作封装, 最后调用 BasePdo::execNotQuery()
+     * 简易删除操作封装, 最后调用 BasePdo::execNoQuery()
      *
      * @param int $id
      * @return boolean true代表成功, 否则失败
      */
     public function deleteById($id)
     {/*{{{*/
-        $table = $this->getTable();
         $pkid = $this->id();
-        $sql = "DELETE FROM {$table} WHERE {$pkid} = ?";
+        $sql = "DELETE FROM %s WHERE {$pkid} = ?";
+        $sql = sprintf($sql, $this->getTable());
 
-        return $this->execNotQuery($sql, array($id));
+        return $this->execNoQuery($sql, array($id));
+    }/*}}}*/
+
+    /**
+     * 获取记录总数
+     *
+     * @param string $sql
+     * @param array $condition
+     *
+     * @return int
+     */
+    public function getCount($condition = array())
+    {/*{{{*/
+        $arr_where_key = $arr_value = array();
+
+        if($condition && is_array($condition))
+        {
+            foreach($condition as $key => $val)
+            {
+                $arr_where_key[] = "{$key} = ?";
+                $arr_value[] = $val;
+            }
+        }
+
+        if($arr_where_key)
+        {
+            $where = implode(' AND ', $arr_where_key);
+            $sql = "SELECT count(*) as cnt FROM %s WHERE {$where}";
+        }
+        else
+        {
+            $sql = "SELECT count(*) as cnt FROM %s";
+        }
+
+        $sql = sprintf($sql, $this->getTable());
+        $row =$this->query($sql, $arr_value);
+
+        return isset($row['cnt']) ? $row['cnt'] : 0;
     }/*}}}*/
 
     /**
@@ -184,5 +221,7 @@ abstract class BasePdoCurd
      *
      * @return void
      */
-    private function __clone(){}
+    private function __clone()
+    {/*{{{*/
+    }/*}}}*/
 }
