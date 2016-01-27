@@ -1,8 +1,4 @@
 <?php
-if(class_exists('Autoloader'))
-{
-    return FALSE;
-}
 /**
  * 框架内置类、框架初始化类、Autoloader::init()之后, 强大的Loader类库就可以使用了 
  *
@@ -16,6 +12,12 @@ if(class_exists('Autoloader'))
  * @author <fanjiapeng@126.com>
  * @package CdvPHP\Loader
  */
+
+if(class_exists('Autoloader'))
+{
+    return FALSE;
+}
+
 class Autoloader
 {
     /** @var array $_ext 初始化来自于dispatch类库位置 */
@@ -31,8 +33,7 @@ class Autoloader
     {/*{{{*/
         self::_checkPhpVersion();
         self::_setDefaultTimezone();
-        self::_initAutoLoad();
-        self::_autoload();
+        self::_loadMode();
         self::_setHandler();
     }/*}}}*/
 
@@ -250,5 +251,24 @@ class Autoloader
         }
 
         return $arr_map;
+    }/*}}}*/
+
+    /**
+     * _loadMode
+     *
+     * @return void
+     */
+    private static function _loadMode()
+    {/*{{{*/
+        $str_filename = ROOT_PATH . '/Public/autoload.php';
+        if(file_exists($str_filename))
+        {
+            self::loadClass($str_filename);
+        }
+        else
+        {
+            self::_initAutoLoad();
+            self::_autoload();
+        }
     }/*}}}*/
 }

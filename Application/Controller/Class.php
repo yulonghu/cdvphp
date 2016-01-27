@@ -37,6 +37,8 @@ class ClassController
      */
     public function test()
     {/*{{{*/
+        echo ConfigLoader::getVar('admin');
+        echo test;
         // 获取加载了多少类
         print_r(Loader::getRegisteredClass());
     }/*}}}*/

@@ -78,3 +78,6 @@ $db = array(
 
 /** @var string $admin 测试做例子用 */
 $admin = 'admin';
+
+define('test', 111);
+

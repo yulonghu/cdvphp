@@ -8,7 +8,7 @@
  * @author <fanjiapeng@126.com>
  * @package CdvPHP\Censor
  */
-Class Censor
+class Censor
 {
     /*
      * @var string $_words 屏蔽的关键词列表

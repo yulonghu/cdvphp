@@ -8,7 +8,8 @@
  * @author <fanjiapeng@126.com>
  * @package public\index
  */
-if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
+if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)))
+{
     return false;
 }
 
@@ -19,12 +20,14 @@ define('FRAMEWORK_PATH', dirname(__DIR__) . '/CdvPHP');
 define('ROOT_PATH', dirname(__DIR__));
 
 // Cdv Autoloader (类库自动加载)
-if(is_dir(FRAMEWORK_PATH)) {
+if(is_dir(FRAMEWORK_PATH))
+{
     include FRAMEWORK_PATH . '/Loader/Autoloader.php';
     Autoloader::init();
 }
 
-if (!class_exists('Autoloader')) {
+if (!class_exists('Autoloader'))
+{
     throw new RuntimeException('Cdv Framework to run failed.');
 }
 
