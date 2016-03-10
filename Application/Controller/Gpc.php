@@ -89,4 +89,15 @@ class GpcController
     {/*{{{*/
         var_dump($p_pic_user, $p_pass);
     }/*}}}*/
+
+    /**
+     * 自动获取$_COOKIE
+     *
+     * @param string $name 相当于 $_COOKIE['name']
+     * @return string
+     */
+    public function getCookie($c_name)
+    {/*{{{*/
+        var_dump($c_name);
+    }/*}}}*/
 }
