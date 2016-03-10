@@ -27,12 +27,12 @@ class GpcController
     /**
      * 获取$_POST参数的值
      *
-     * http://域名/index.php?method=Gpc.world
+     * http://域名/index.php?method=Gpc.check
      *
      * POST: username=cdvphp&password=123456
      *
-     * @param mixed $p_username
-     * @param mixed $password 
+     * @param mixed $p_username 获取$_POST的值
+     * @param mixed $password   获取$_GET的值
      *
      * @return mixed
      */
