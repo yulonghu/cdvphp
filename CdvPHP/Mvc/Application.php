@@ -161,11 +161,13 @@ class Application
             {
                 $arr_tmp = explode('_', $param->getName());	
                 $str_prefix = $arr_tmp[0] . '_';
+                unset($arr_tmp);
             }
 
-            $str_input_param = preg_replace("/^{$str_prefix}/", '', $param->getName());
+            $str_input_param = $param->getName();
             if($str_prefix && array_key_exists($str_prefix, $this->_gpc))
             {
+                $str_input_param = preg_replace("/^{$str_prefix}/", '', $param->getName());
                 $str_input_value = isset($this->_gpc[$str_prefix][$str_input_param]) ? $this->_gpc[$str_prefix][$str_input_param] : FALSE;
             }
             else

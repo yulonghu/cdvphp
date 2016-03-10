@@ -63,4 +63,30 @@ class GpcController
         var_dump(Sg::$inputs['post']);
         var_dump(Sg::$inputs['cookie']);
     }/*}}}*/
+
+    /**
+     * 测试一个带下划线的GET参数
+     *
+     * http://域名/?method=Gpc.getList&pic_user=ddd&pass=123456
+     *
+     * @param string $pic_user
+     * @return string
+     */
+    public function getList($pic_user, $pass)
+    {/*{{{*/
+        var_dump($pic_user, $pass);
+    }/*}}}*/
+
+    /**
+     * 测试一个带下划线的POST参数
+     *
+     * curl 'http://127.0.0.1/?method=Gpc.setInfo' -d 'pic_user=ddd&pass=123456' -H 'host: 域名'
+     *
+     * @param string $pic_user
+     * @return string
+     */
+    public function setInfo($p_pic_user, $p_pass)
+    {/*{{{*/
+        var_dump($p_pic_user, $p_pass);
+    }/*}}}*/
 }
