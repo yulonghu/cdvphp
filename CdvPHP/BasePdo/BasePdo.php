@@ -139,12 +139,22 @@ class BasePdo extends BasePdoCurd
      */
     public function isGoneAway()
     {/*{{{*/
-        if ($this->_pdo && false !== strpos($this->_pdo->getAttribute(PDO::ATTR_SERVER_INFO), 'gone away'))
+        try
         {
-            return true;
+            if(is_object($this->_pdo) && $this->_pdo->getAttribute(PDO::ATTR_SERVER_INFO))
+            {
+                return false;
+            }
+        }
+        catch(PDOException $e)
+        {
+            if(false !== stripos($e->getMessage(), 'gone away'))
+            {
+                return true;
+            }
         }
 
-        return false;
+        return true;
     }/*}}}*/
 
     /**
