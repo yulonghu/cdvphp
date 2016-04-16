@@ -1,26 +1,24 @@
 #!/bin/sh
 #------------------------------------
 # build autoload files
-# Auther: fanjiapeng@360.cn
-# Ctime:  2016/01/21
+#
+# @command: sh Project/autoload_builder.sh
+# @Auther: fanjiapeng@360.cn
+# @Ctime:  2016/01/21
 #------------------------------------
 
 export PATH=$PATH:/usr/local/php/bin
 
 PHP=`which php`
+
+# 项目名称
 PROJECT_NAME='cdvphp'
 
-if [ `uname` == 'Linux' ]
-then
-    basedir=`dirname $(readlink -f $0)`
-    PROJECT_HOME=`readlink -f $basedir/../`
-elif [ `uname` == 'FreeBSD' ]
-then
-    basedir=`dirname $(realpath $0)`
-    PROJECT_HOME=`realpath $basedir/../`
-fi
+# 项目路径
+ROOT_PATH=`pwd`
 
-AUTOLOAD_PATH_PROJECT="$PROJECT_HOME/CdvPHP:$PROJECT_HOME/Application"
+# 生成目录
+AUTOLOAD_PATH_PROJECT="$ROOT_PATH/CdvPHP:$ROOT_PATH/Application"
 
-$PHP $PROJECT_HOME/Project/build_includes.php $AUTOLOAD_PATH_PROJECT $PROJECT_HOME/Public/autoload.php "${PROJECT_NAME}:$USER:autoload:server"
+$PHP $ROOT_PATH/Project/build_includes.php $AUTOLOAD_PATH_PROJECT $ROOT_PATH/Public/autoload.php "${PROJECT_NAME}:$USER:autoload:server"
 
