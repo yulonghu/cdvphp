@@ -4,7 +4,7 @@
  *
  * 以JSON串格式存入到log文本文件, 排查问题必备
  *
- * 日志文件名按天取名, 文本文件格式:  xxx.log.ymd
+ * 日志文件名按天取名, 文本文件格式:  xxx_log.ymd
  *
  * @link http://www.cdvphp.com
  * @author <fanjiapeng@126.com>
@@ -16,13 +16,13 @@ class Logger
     public $full_path = null;
 
     /** @var string $site_file_name 相当于access.log, 但这个日志是个性化的记录, 可以自定义文本文件名称 */
-    public $site_file_name 	 = 'website.log';
+    public $site_file_name 	 = 'website_log';
 
     /** @var string $sql_file_name 线上、线下都建议记录, 可以自定义文本文件名称 */
-    public $sql_file_name  	 = 'sql.log';
+    public $sql_file_name  	 = 'sql_log';
 
     /** @var string $debug_file_name 调试环境下使用, 可以自定义文本文件名称 */
-    public $debug_file_name  = 'debug.log';
+    public $debug_file_name  = 'debug_log';
 
     /**
      * 所有日志路径的初始化
@@ -53,20 +53,24 @@ class Logger
      */
     public function siteInfo($reponse = '')
     {/*{{{*/
+        $info = '';
+        $data = array();
+
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
         if(!empty($reponse))
         {
-            $info['reponse'] = $reponse; 
+            $data['reponse'] = $reponse;
         }
 
-        $info['get'] = isset($_GET) ? $_GET : '';
-        $info['post'] = isset($_POST) ? $_POST : '';
-        $info['cookie'] = isset($_COOKIE) ? $_COOKIE : '';
+        $data['get'] = isset($_GET) ? $_GET : '';
+        $data['post'] = isset($_POST) ? $_POST : '';
+        $data['cookie'] = isset($_COOKIE) ? $_COOKIE : '';
 
-        $info['timestamp'] = time(); 
-        $info['date'] = date('Y-m-d H:i:s');
-        $info['ip'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+        $info  = '[LOG_TIME] '. date('Y-m-d H:i:s') . "\t";
+        $info .= "[IP] {$ip} \t";
+        $info .= "[SITE] " . json_encode($data);
 
-        error_log(json_encode($info) . PHP_EOL, 3, $this->full_path . DIRECTORY_SEPARATOR . $this->site_file_name. '.' . date('Ymd'));
+        error_log($info . PHP_EOL, 3, $this->full_path . DIRECTORY_SEPARATOR . $this->site_file_name. '.' . date('Ymd'));
     }/*}}}*/
 
     /**
@@ -78,14 +82,13 @@ class Logger
      */
     public function sqlInfo($sql, $time)
     {/*{{{*/
-        $info['sql'] = $sql;
-        $info['exec_time'] = $time; 
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+        $info  = '[LOG_TIME] '. date('Y-m-d H:i:s') . "\t";
+        $info .= "[IP] {$ip} \t";
+        $info .= "[EXE_TIME] {$time} \t";
+        $info .= "[SQL] {$sql}";
 
-        $info['timestamp'] = time(); 
-        $info['date'] = date('Y-m-d H:i:s');
-        $info['ip'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
-
-        error_log(json_encode($info) . PHP_EOL, 3, $this->full_path . DIRECTORY_SEPARATOR . $this->sql_file_name. '.' . date('Ymd'));
+        error_log($info . PHP_EOL, 3, $this->full_path . DIRECTORY_SEPARATOR . $this->sql_file_name. '.' . date('Ymd'));
     }/*}}}*/
 
     /**
@@ -101,20 +104,25 @@ class Logger
      */
     public function debugInfo($type, $errno, $file, $line, $msg)
     {/*{{{*/
-        $info['status'] = $type;
-        $info['get'] = isset($_GET) ? $_GET : '';
-        $info['post'] = isset($_POST) ? $_POST : '';
-        $info['cookie'] = isset($_COOKIE) ? $_COOKIE : '';
+        $info = '';
+        $data = array();
 
-        $info['info']['errno'] = $errno;
-        $info['info']['file'] = $file;
-        $info['info']['line'] = $line;
-        $info['info']['msg']  = $msg;
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+        $info  = '[LOG_TIME] '. date('Y-m-d H:i:s') . "\t";
+        $info .= "[IP] {$ip} \t";
 
-        $info['timestamp'] = time(); 
-        $info['date'] = date('Y-m-d H:i:s');
-        $info['ip'] = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+        $data['status'] = $type;
+        $data['get'] = isset($_GET) ? $_GET : '';
+        $data['post'] = isset($_POST) ? $_POST : '';
+        $data['cookie'] = isset($_COOKIE) ? $_COOKIE : '';
 
-        error_log(json_encode($info) . PHP_EOL, 3, $this->full_path . DIRECTORY_SEPARATOR . $this->debug_file_name. '.' . date('Ymd'));
+        $data['info']['errno'] = $errno;
+        $data['info']['file'] = $file;
+        $data['info']['line'] = $line;
+        $data['info']['msg']  = $msg;
+
+        $info .= "[DEBUG] " . json_encode($data);
+
+        error_log($info . PHP_EOL, 3, $this->full_path . DIRECTORY_SEPARATOR . $this->debug_file_name. '.' . date('Ymd'));
     }/*}}}*/
 }

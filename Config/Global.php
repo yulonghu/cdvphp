@@ -13,7 +13,7 @@ $system = array(
          * 当且仅当 debug === TRUE 时，错误日志会直接输出到界面，方便调试; 否则会输出到日志, 这种方式用于线上模式
          * @var boolean $debug
          */
-        'debug'   => TRUE,
+        'debug'   => FALSE,
         /**
          * 当且仅当 website === TRUE 时, 记录访问日志
          * @var boolean $website
