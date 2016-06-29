@@ -24,17 +24,21 @@
 // 另一种加载模版方法
 {template Admin/index}
 
-// 输出一个变量三种写法
+// 输出一个变量四种写法
 <!--{$name}-->
 
 {echo $name}
 
 {$name}
 
-// 日期输出
+<?=$name?>
+
+// 日期输出三种写法
 <!--{date(Ymd)}-->
 
-<script src="http://www.box3.cn/bootstrap/js/jquery-1.9.1.min.js"></script>
+{date(Ymd)}
+
+<?=date(Ymd)?>
 
 // 定向符例子
 {block title}
@@ -47,7 +51,11 @@ dddd
 // 输出定向符
 {$title}
 
-<a href="http://www.cdvphp.com?id=1&user=test" target="_blank">CdvPHP.com</a>
+// 输出常量两种写法
+{TEST_CONSTANTS}
+
+<?=TEST_CONSTANTS?>
+
 </pre>
 // 加载模版
 <!--{subtemplate footer}-->

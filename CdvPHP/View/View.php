@@ -263,7 +263,7 @@ class View
         $template = preg_replace_callback("/\{$const_regexp\}/s",
             function($mathes)
             {
-                return '<?=\\1?>';
+                return "<?={$mathes[1]}?>";
             }, $template);
         if(!empty(self::$replacecode)) {
             $template = str_replace(self::$replacecode['search'], self::$replacecode['replace'], $template);
