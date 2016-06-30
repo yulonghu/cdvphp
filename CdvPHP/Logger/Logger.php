@@ -33,7 +33,7 @@ class Logger
     {/*{{{*/
         if(!$this->full_path)
         {
-            $this->full_path = ROOT_PATH . DIRECTORY_SEPARATOR . 'Log';
+            $this->full_path = ROOT_PATH . DIRECTORY_SEPARATOR . 'Logs';
         }
 
         if(!is_dir($this->full_path))

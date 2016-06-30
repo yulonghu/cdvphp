@@ -1,4 +1,4 @@
-Log/*_log*
+Log*/*log*
 Application/View/TemplatesCache/*
 *.swp
 *.swo
