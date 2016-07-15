@@ -156,7 +156,7 @@ abstract class BasePdoCurd
             $arr_value[] = $val;
         }
 
-        $where = implode(',', $arr_where_key);
+        $where = implode(' AND ', $arr_where_key);
         $limit = $limit ? " LIMIT {$limit}" : '';
         $sql = "DELETE FROM %s WHERE {$where} {$limit}";
         $sql = sprintf($sql, $this->getTable());
