@@ -95,14 +95,14 @@ class BasePdo extends BasePdoCurd
                 try
                 {
                     $arr_opt[PDO::ATTR_TIMEOUT] = 1;
-                    $this->_pdo = new PDO("mysql:host={$host};dbname={$db['dbname']};charset=utf8", $db['username'], $db['password']);
+                    $this->_pdo = new PDO("mysql:host={$host};dbname={$db['dbname']};charset=utf8", $db['username'], $db['password'], $arr_opt);
                 }
                 catch(PDOException $e)
                 {
                     if(strstr($e->getMessage(),'[2003]') || strstr($e->getMessage(),'[2002]')) // 防止内网丢包，重试解决
                     {
                         $arr_opt[PDO::ATTR_TIMEOUT] = 2;
-                        $this->_pdo = new PDO("mysql:host={$host};dbname={$db['dbname']};charset=utf8", $db['username'], $db['password']);
+                        $this->_pdo = new PDO("mysql:host={$host};dbname={$db['dbname']};charset=utf8", $db['username'], $db['password'], $arr_opt);
                     }
                     else
                     {

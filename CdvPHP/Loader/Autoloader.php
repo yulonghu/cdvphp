@@ -94,7 +94,9 @@ class Autoloader
      */
     public static function _exceptionHandler($e)
     {/*{{{*/
-        Loader::getInstance('Logger')->debugInfo('exception', $e->getCode(), $e->getFile(), $e->getLine(), $e->getMessage());
+        $class_name = get_class($e);
+        $class_name = !empty($class_name) ? $class_name : 'exception';
+        Loader::getInstance('Logger')->debugInfo($class_name, $e->getCode(), $e->getFile(), $e->getLine(), $e->getMessage());
         exit(0);
     }/*}}}*/
 
