@@ -71,7 +71,7 @@ abstract class BasePdoCurd
         }
 
         $cmd = "UPDATE " . ($low_priority ? 'LOW_PRIORITY' : '');
-        $set = implode(',', $arr_set_key);
+        $set = implode(', ', $arr_set_key);
 
         if($arr_where_key)
         {
@@ -111,7 +111,7 @@ abstract class BasePdoCurd
             $arr_value[] = $val;
         }
 
-        $set = implode(',', $arr_set_key);
+        $set = implode(', ', $arr_set_key);
         $cmd = $replace ? 'REPLACE INTO' : 'INSERT INTO';
         $sql = sprintf("{$cmd} %s SET {$set}", $this->getTable());
 
@@ -214,6 +214,58 @@ abstract class BasePdoCurd
         $row =$this->query($sql, $arr_value);
 
         return isset($row['cnt']) ? $row['cnt'] : 0;
+    }/*}}}*/
+
+    /**
+     * addByArray alias insert
+     *
+     * @param array $pairs
+     * @return boolean
+     */
+    public function addByArray($data = array())
+    {/*{{{*/
+        return $this->insert($data);
+    }/*}}}*/
+
+    /**
+     * on duplicate key update
+     * 用于唯一索引更新
+     *
+     * @param array $data
+     * @param array $condition
+     *
+     * @return boolean true成功 false失败
+     */
+    public function addDupByArray($data = array(), $condition = array())
+    {/*{{{*/
+        if (empty($data) || !is_array($data)) {
+            return FALSE;
+        }
+
+        if (empty($condition) || !is_array($condition)) {
+            return FALSE;
+        }
+
+        $arr_set_key = $arr_where_key = $arr_value = array();
+
+        foreach ($data as $key => $val) {
+            $arr_set_key[] = "{$key} = ?";
+            $arr_value[] = $val;
+        }
+
+        foreach ($condition as $key => $val) {
+            $arr_where_key[] = "{$key} = ?";
+            $arr_value[] = $val;
+        }
+
+        $cmd = 'INSERT INTO';
+        $set = implode(', ', $arr_set_key);
+        $where = implode(', ', $arr_where_key);
+
+        $sql = "{$cmd} %s SET {$set} ON DUPLICATE KEY UPDATE {$where}";
+        $sql = sprintf($sql, $this->getTable());
+
+        return $this->execNoQuery($sql, $arr_value);
     }/*}}}*/
 
     /**

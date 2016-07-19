@@ -112,7 +112,7 @@ class BasePdo extends BasePdoCurd
 
                 $this->link[$key] = $this->_pdo;
                 $end_time = microtime(true);
-                $this->debug('Connect Db', array(), ($end_time - $start_time));
+                $this->debug("Connect_DB: mysql:host={$host};dbname={$db['dbname']};user={$db['username']};pwd=*", array(), ($end_time - $start_time));
             }
             catch(PDOException $e)
             {
